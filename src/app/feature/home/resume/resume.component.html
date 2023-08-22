@@ -1,0 +1,45 @@
+<div *ngIf="resumeData">
+  <h2>Account ID: {{ resumeData.accountId }}</h2>
+  <mat-table [dataSource]="resumeData.budgets" class="mat-elevation-z8">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Budget</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="spent">
+      <mat-header-cell *matHeaderCellDef>Valor Gasto</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget.spent | currency }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="mustSpent">
+      <mat-header-cell *matHeaderCellDef>Devo Gastar</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget.mustSpent | currency }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="percentUsed">
+      <mat-header-cell *matHeaderCellDef>Utilizado</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget.percentUsed | percent }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="percentTotal">
+      <mat-header-cell *matHeaderCellDef>Total</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget.percentTotal | percent }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'spent', 'mustSpent', 'percentUsed', 'percentTotal']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'spent', 'mustSpent', 'percentUsed', 'percentTotal']"></mat-row>
+  </mat-table>
+
+  <mat-list class="summary-list">
+    <h2 class="data-heading">Account ID: {{ resumeData.accountId }}</h2>
+    <mat-list-item>
+      <h3 mat-line>Total Gasto: {{ resumeData.totalSpent | currency }}</h3>
+    </mat-list-item>
+    <mat-list-item>
+      <h3 mat-line>Devo Gastar: {{ resumeData.totalMustSpent | currency }}</h3>
+    </mat-list-item>
+    <mat-list-item>
+      <h3 mat-line>Utilizado: {{ resumeData.utilized | percent }}</h3>
+    </mat-list-item>
+  </mat-list>
+</div>
