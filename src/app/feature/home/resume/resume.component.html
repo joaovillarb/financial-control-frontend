@@ -1,5 +1,5 @@
 <div *ngIf="resumeData">
-  <h2>Account ID: {{ resumeData.accountId }}</h2>
+  <h2>Resumo</h2>
   <mat-table [dataSource]="resumeData.budgets" class="mat-elevation-z8">
     <ng-container matColumnDef="name">
       <mat-header-cell *matHeaderCellDef>Budget</mat-header-cell>
@@ -30,16 +30,18 @@
     <mat-row *matRowDef="let row; columns: ['name', 'spent', 'mustSpent', 'percentUsed', 'percentTotal']"></mat-row>
   </mat-table>
 
-  <mat-list class="summary-list">
-    <h2 class="data-heading">Account ID: {{ resumeData.accountId }}</h2>
-    <mat-list-item>
-      <h3 mat-line>Total Gasto: {{ resumeData.totalSpent | currency }}</h3>
-    </mat-list-item>
-    <mat-list-item>
-      <h3 mat-line>Devo Gastar: {{ resumeData.totalMustSpent | currency }}</h3>
-    </mat-list-item>
-    <mat-list-item>
-      <h3 mat-line>Utilizado: {{ resumeData.utilized | percent }}</h3>
-    </mat-list-item>
-  </mat-list>
+  <div style="margin-top: 20px" fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+    <div fxFlex>
+      <h2 style="margin-bottom: 0; color: green">{{ resumeData.totalSpent | currency }}</h2>
+      <h3>Total Gasto</h3>
+    </div>
+    <div fxFlex>
+      <h2 style="margin-bottom: 0; color: red">{{ resumeData.totalMustSpent | currency }}</h2>
+      <h3>Quanto Posso Gastar</h3>
+    </div>
+    <div fxFlex>
+      <h2 style="margin-bottom: 0">{{ resumeData.utilized | percent }}</h2>
+      <h3>Utilizado</h3>
+    </div>
+  </div>
 </div>

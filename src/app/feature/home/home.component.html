@@ -1,4 +1,40 @@
-<h1>Welcome to the Home Page</h1>
-<p>This is the content of the home page.</p>
+<div class="basic-container">
 
-<app-resume></app-resume>
+  <div fxLayout="row" fxLayoutGap="20px">
+    <div fxFlex>
+      <h1>Orcamento Domestico</h1>
+      <p>Controle seu orcamento domestico com base em suas proprias metas e rendimentos</p>
+    </div>
+    <div fxFlex fxLayoutAlign="end end">
+      <mat-form-field class="salary-form-field">
+        <mat-label>Seu salario</mat-label>
+        <input matInput placeholder="R$ 6700.00"
+               currencyMask [(ngModel)]="this.accountData.salary"
+               [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }"/>
+
+        <button matSuffix
+                mat-icon-button
+                aria-label="Save"
+                (click)="saveNewSalary()">
+          <mat-icon>check</mat-icon>
+        </button>
+      </mat-form-field>
+
+    </div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="start start" fxLayoutGap="20px">
+    <div fxFlex>
+      <app-resume [resumeData]="resumeData"></app-resume>
+    </div>
+    <div fxFlex>
+      <app-goal></app-goal>
+    </div>
+  </div>
+
+
+  <h1>Edite seus custos</h1>
+
+  <app-edit-costs [budgetList]="this.accountData.budgetList"></app-edit-costs>
+
+</div>

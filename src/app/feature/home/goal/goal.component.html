@@ -1,0 +1,17 @@
+<div *ngIf="goalsData">
+  <h2>Metas</h2>
+  <mat-table [dataSource]="goalsData" class="mat-elevation-z8">
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Categoria</mat-header-cell>
+      <mat-cell *matCellDef="let goal">{{ goal.category.name }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="mustSpentPercentage">
+      <mat-header-cell *matHeaderCellDef>Devo Gastar</mat-header-cell>
+      <mat-cell *matCellDef="let goal">{{ goal.mustSpentPercentage | percent }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['category', 'mustSpentPercentage']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['category', 'mustSpentPercentage']"></mat-row>
+  </mat-table>
+</div>

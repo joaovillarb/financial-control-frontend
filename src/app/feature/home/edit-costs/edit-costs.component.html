@@ -1,0 +1,28 @@
+<div *ngIf="budgetList">
+
+  <mat-table [dataSource]="budgetList" class="mat-elevation-z8">
+    <ng-container matColumnDef="date">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget.date | date }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="spent">
+      <mat-header-cell *matHeaderCellDef>Spent</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget["spent"] | currency }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget.description }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Category</mat-header-cell>
+      <mat-cell *matCellDef="let budget">{{ budget["category"]["name"] }}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['date', 'spent', 'description', 'category']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['date', 'spent', 'description', 'category']"></mat-row>
+  </mat-table>
+
+</div>
